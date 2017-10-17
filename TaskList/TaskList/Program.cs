@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace TaskList
 {
@@ -11,12 +12,15 @@ namespace TaskList
             Console.InputEncoding = Encoding.GetEncoding(852);
             Console.OutputEncoding = Encoding.UTF8;
 
+            List < Task > lista = new List<Task>();
+
+
             do
             {
                 Console.WriteLine("Wpisz polecenie:");
                 string command = Console.ReadLine();
                 if (command=="exit") { break; }
-
+                
 
             } while (true);
 
