@@ -28,10 +28,10 @@ namespace TaskList
                         break;
                     case "AddTask":
                     case "a":
-                        //Commands.AddTask();
+                        Commands.AddTask();
                         break;
                     case "ShowTasks":
-                        //Commands.ShowTasks();
+                        Commands.ShowTasks();
                         break;
                     case "RemoveTasks":
                         //Commands.RemoveTasks();
