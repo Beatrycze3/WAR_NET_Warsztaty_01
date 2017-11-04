@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace TaskList
 {
-    class Program
+    public class Program
     {
-        public static List<Task> lista = new List<Task>();
-
         static void Main(string[] args)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -56,8 +54,5 @@ namespace TaskList
             Console.WriteLine("Dziękujemy za skorzystanie z naszego programu \"Task\".");
             Console.ReadKey();
         }
-
-       
-
     }
 }

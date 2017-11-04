@@ -6,18 +6,13 @@ namespace TaskList
 {
     public class Task
     {
-        public string description;
-        public DateTime startTime;
-        public DateTime? endTime;
-        public bool isDaily;
-        public bool isImportant;
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public bool IsDaily { get; set; }
+        public bool IsImportant { get; set; }
 
-
-        public Task(string tekst, DateTime beggining)
-        {
-            description = tekst;
-            startTime = beggining;
-        }
+        
 
 
     }
