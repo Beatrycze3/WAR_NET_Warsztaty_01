@@ -11,6 +11,7 @@ namespace TaskList
             Console.ForegroundColor = color;
             Console.WriteLine(tekst);
             Console.ForegroundColor = ConsoleColor.Gray;
+            return this;
         }
 
         public ConsoleClr Write(string tekst, ConsoleColor color)
@@ -18,6 +19,7 @@ namespace TaskList
             Console.ForegroundColor = color;
             Console.Write(tekst);
             Console.ForegroundColor = ConsoleColor.Gray;
+            return this;
         }
     }
 }

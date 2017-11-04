@@ -6,6 +6,8 @@ namespace TaskList
 {
     class Program
     {
+        public static List<Task> lista = new List<Task>();
+
         static void Main(string[] args)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -14,18 +16,48 @@ namespace TaskList
 
             List < Task > lista = new List<Task>();
 
+            bool keepOnLooping = true;
 
             do
             {
                 Console.WriteLine("Wpisz polecenie:");
                 string command = Console.ReadLine();
-                if (command=="exit") { break; }
                 
+                switch (command)
+                {
+                    case "exit":
+                        keepOnLooping = false;
+                        break;
+                    case "AddTask":
+                    case "a":
+                        //Commands.AddTask();
+                        break;
+                    case "ShowTasks":
+                        //Commands.ShowTasks();
+                        break;
+                    case "RemoveTasks":
+                        //Commands.RemoveTasks();
+                        break;
+                    case "Save":
+                    case "s":
+                        //Commands.Save();
+                        break;
+                    case "Load":
+                    case "l":
+                        //Comands.Load();
+                        break;
+                    default:
+                        Console.WriteLine("Nie ma takiego polecenia.");
+                        break;
+                }
 
-            } while (true);
+            } while (keepOnLooping);
 
-
+            Console.WriteLine("Dziękujemy za skorzystanie z naszego programu \"Task\".");
             Console.ReadKey();
         }
+
+       
+
     }
 }
