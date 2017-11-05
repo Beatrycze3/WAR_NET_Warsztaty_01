@@ -12,7 +12,30 @@ namespace TaskList
         public bool IsDaily { get; set; }
         public bool IsImportant { get; set; }
 
-        
+        public string Export()
+        {
+            string text = $"{Description};{StartTime};";
+
+            if(IsDaily)
+            {
+                text += "null;t;";
+            }
+            else
+            {
+                text += $"{EndTime};n;";
+            }
+
+            if(IsImportant)
+            {
+                text += "t";
+            }
+            else
+            {
+                text += "n";
+            }
+            return text;
+        }
+
 
 
     }
