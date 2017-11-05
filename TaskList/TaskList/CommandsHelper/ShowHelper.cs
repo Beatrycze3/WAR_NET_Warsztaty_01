@@ -45,14 +45,14 @@ namespace TaskList.CommandsHelper
             if (!ourTask.IsDaily)
             {
                 //zdarzenia nie rozpoczęte
-                if (ourTask.StartTime < DateTime.Now)
+                if (ourTask.StartTime > DateTime.Now)
                 {
                     if (ourTask.IsImportant) { return 4; }
                     return 1;
                 }
 
                 //zdarzenia zakończone
-                if (ourTask.EndTime > DateTime.Now)
+                if (ourTask.EndTime < DateTime.Now)
                 {
                     if (ourTask.IsImportant) { return 6; }
                     return 3;
@@ -67,36 +67,36 @@ namespace TaskList.CommandsHelper
             else
             {
                 //sprawdzenie roku
-                if (ourTask.StartTime.Year < DateTime.Now.Year)
+                if (ourTask.StartTime.Year > DateTime.Now.Year)
                 {
                     if (ourTask.IsImportant) { return 4; }
                     return 1;
                 }
-                else if (ourTask.StartTime.Year > DateTime.Now.Year)
+                else if (ourTask.StartTime.Year < DateTime.Now.Year)
                 {
                     if (ourTask.IsImportant) { return 6; }
                     return 3;
                 }
 
                 //sprawdzenie miesiąca
-                if (ourTask.StartTime.Month < DateTime.Now.Month)
+                if (ourTask.StartTime.Month > DateTime.Now.Month)
                 {
                     if (ourTask.IsImportant) { return 4; }
                     return 1;
                 }
-                else if (ourTask.StartTime.Month > DateTime.Now.Month)
+                else if (ourTask.StartTime.Month < DateTime.Now.Month)
                 {
                     if (ourTask.IsImportant) { return 6; }
                     return 3;
                 }
 
                 //sprawdzenie dnia
-                if (ourTask.StartTime.Day < DateTime.Now.Day)
+                if (ourTask.StartTime.Day > DateTime.Now.Day)
                 {
                     if (ourTask.IsImportant) { return 4; }
                     return 1;
                 }
-                else if (ourTask.StartTime.Day > DateTime.Now.Day)
+                else if (ourTask.StartTime.Day < DateTime.Now.Day)
                 {
                     if (ourTask.IsImportant) { return 6; }
                     return 3;
