@@ -36,7 +36,7 @@ namespace TaskList
             return text;
         }
 
-        public Task Import (string text)
+        public static Task Import (string text)
         {
             Task importedTask = new Task();
             string[] temp = text.Split(';');

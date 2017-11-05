@@ -10,6 +10,7 @@ namespace TaskList
     {
         private static List<Task> tasksList = new List<Task>();
         private static ConsoleClr consoleClr = new ConsoleClr();
+        private static string path = Directory.GetCurrentDirectory() + "\\TasksList.txt";
 
         public static void AddTask()
         {
@@ -123,14 +124,32 @@ namespace TaskList
                 allTasks.AppendLine(item.Export());
             }
 
-            string path = Directory.GetCurrentDirectory() + "\\TasksList.txt";
-
             File.WriteAllText(path, allTasks.ToString());
 
             consoleClr.WriteLine("Lista została zapisana do pliku", ConsoleColor.Green);
         }
 
-        //Comands.Load();
+        public static void Load()
+        {
+            try
+            {
+                string[] allTasksInString = File.ReadAllLines(path);
+
+                List<Task> loadedTasksList = new List<Task>();
+
+                foreach (string item in allTasksInString)
+                {
+                    loadedTasksList.Add(Task.Import(item));
+                }
+
+                tasksList = loadedTasksList;
+                consoleClr.WriteLine("Lista zadań została pobrana.", ConsoleColor.Green);
+            }
+            catch(FileNotFoundException)
+            {
+                consoleClr.WriteLine("Brak zadań do wczytania.", ConsoleColor.DarkRed);
+            }
+        }
 
         private static void CommentsSuccess(string text)
         {

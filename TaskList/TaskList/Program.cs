@@ -12,7 +12,9 @@ namespace TaskList
             Console.InputEncoding = Encoding.GetEncoding(852);
             Console.OutputEncoding = Encoding.UTF8;
 
-            List < Task > lista = new List<Task>();
+            Console.WriteLine("!!!Witamy w programie \"Task\"!!!");
+
+            Commands.Load();
 
             bool keepOnLooping = true;
 
@@ -42,7 +44,7 @@ namespace TaskList
                         break;
                     case "Load":
                     case "l":
-                        //Comands.Load();
+                        Commands.Load();
                         break;
                     default:
                         Console.WriteLine("Nie ma takiego polecenia.");
