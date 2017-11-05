@@ -11,6 +11,7 @@ namespace TaskList
         private static List<Task> tasksList = new List<Task>();
         private static ConsoleClr consoleClr = new ConsoleClr();
         private static string path = Directory.GetCurrentDirectory() + "\\TasksList.txt";
+        private static int[] padsSize = { 30, 20, 20 };
 
         public static void AddTask()
         {
@@ -43,7 +44,7 @@ namespace TaskList
             }
             tempTask.StartTime = DateHelper.StringToDate(temp[1]);
 
-            if(temp.Length==2)
+            if (temp.Length == 2)
             {
                 tempTask.EndTime = null;
                 tempTask.IsDaily = true;
@@ -99,7 +100,7 @@ namespace TaskList
                     .WriteLine("- ważne rozpoczęte zdarzenie", ConsoleColor.Yellow)
                     .WriteLine("- ważne zakończone zdarzenie", ConsoleColor.Green);
 
-            int[] padsSize = { 30, 20, 20 };
+            
 
             string text = $"{"Opis".PadLeft(padsSize[0], ' ')}|" +
                $"{"Data rozpoczęcia".PadLeft(padsSize[1], ' ')}|" +
@@ -114,12 +115,54 @@ namespace TaskList
             }
         }
 
-        //Commands.RemoveTasks();
+        public static void RemoveTasks()
+        {
+            
+
+            string text = $"Index|{"Opis".PadLeft(padsSize[0], ' ')}|" +
+               $"{"Data rozpoczęcia".PadLeft(padsSize[1], ' ')}|" +
+               $"{"Data zakończenia".PadLeft(padsSize[2], ' ')}|";
+               
+            Console.WriteLine(text);
+            Console.WriteLine("`".PadLeft(padsSize[0] + padsSize[1] + padsSize[2] + 8, '`'));
+
+            int index = 1;
+            foreach (Task item in tasksList)
+            {
+                Console.Write($"{index}".PadLeft(5,' '));
+                ShowHelper.ShowTask(item, padsSize);
+                index++;
+            }
+            
+
+            index = 1;
+            try
+            {
+                Console.Write("Podaj indeks zdarzenia które chcesz usunąć: ");
+                int removeIndex = Convert.ToInt32(Console.ReadLine());
+
+                foreach (Task item in tasksList)
+                {
+                    if (index == removeIndex)
+                    {
+                        tasksList.Remove(item);
+                        CommentsSuccess("Usunięcie");
+                        return;
+                    }
+                }
+
+                consoleClr.WriteLine("Podany indeks nie istnieje.", ConsoleColor.Red);
+            }
+            catch(FormatException)
+            {
+                consoleClr.WriteLine("Niepoprawny format wpisanego indeksu.", ConsoleColor.Red);
+            }
+        }
 
         public static void Save()
         {
             StringBuilder allTasks = new StringBuilder();
-            foreach(Task item in tasksList)
+            foreach (Task item in tasksList)
             {
                 allTasks.AppendLine(item.Export());
             }
@@ -145,7 +188,7 @@ namespace TaskList
                 tasksList = loadedTasksList;
                 consoleClr.WriteLine("Lista zadań została pobrana.", ConsoleColor.Green);
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 consoleClr.WriteLine("Brak zadań do wczytania.", ConsoleColor.DarkRed);
             }

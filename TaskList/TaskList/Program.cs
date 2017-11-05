@@ -36,7 +36,7 @@ namespace TaskList
                         Commands.ShowTasks();
                         break;
                     case "RemoveTasks":
-                        //Commands.RemoveTasks();
+                        Commands.RemoveTasks();
                         break;
                     case "Save":
                     case "s":
