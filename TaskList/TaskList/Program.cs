@@ -38,7 +38,7 @@ namespace TaskList
                         break;
                     case "Save":
                     case "s":
-                        //Commands.Save();
+                        Commands.Save();
                         break;
                     case "Load":
                     case "l":

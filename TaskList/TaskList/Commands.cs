@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using TaskList.CommandsHelper;
 
@@ -40,6 +41,17 @@ namespace TaskList
                 return;
             }
             tempTask.StartTime = DateHelper.StringToDate(temp[1]);
+
+            if(temp.Length==2)
+            {
+                tempTask.EndTime = null;
+                tempTask.IsDaily = true;
+                tempTask.IsImportant = false;
+
+                tasksList.Add(tempTask);
+                CommentsSuccess("Dodanie");
+                return;
+            }
 
             //Sprawdzenie czy całodniowe
             if (temp.Length == 3)
@@ -89,8 +101,8 @@ namespace TaskList
             int[] padsSize = { 30, 20, 20 };
 
             string text = $"{"Opis".PadLeft(padsSize[0], ' ')}|" +
-               $"{"Data rozpoczęcia".ToString().PadLeft(padsSize[1], ' ')}|" +
-               $"{"Data zakończenia".ToString().PadLeft(padsSize[2], ' ')}|";
+               $"{"Data rozpoczęcia".PadLeft(padsSize[1], ' ')}|" +
+               $"{"Data zakończenia".PadLeft(padsSize[2], ' ')}|";
 
             Console.WriteLine(text);
             Console.WriteLine("`".PadLeft(padsSize[0] + padsSize[1] + padsSize[2] + 3, '`'));
@@ -102,7 +114,22 @@ namespace TaskList
         }
 
         //Commands.RemoveTasks();
-        //Commands.Save();
+
+        public static void Save()
+        {
+            StringBuilder allTasks = new StringBuilder();
+            foreach(Task item in tasksList)
+            {
+                allTasks.AppendLine(item.Export());
+            }
+
+            string path = Directory.GetCurrentDirectory() + "\\TasksList.txt";
+
+            File.WriteAllText(path, allTasks.ToString());
+
+            consoleClr.WriteLine("Lista została zapisana do pliku", ConsoleColor.Green);
+        }
+
         //Comands.Load();
 
         private static void CommentsSuccess(string text)
