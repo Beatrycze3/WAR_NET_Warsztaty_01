@@ -36,6 +36,37 @@ namespace TaskList
             return text;
         }
 
+        public Task Import (string text)
+        {
+            Task importedTask = new Task();
+            string[] temp = text.Split(';');
+
+            importedTask.Description = temp[0];
+            importedTask.StartTime = Convert.ToDateTime(temp[1]);
+            
+            if(temp[2]=="null")
+            {
+                importedTask.EndTime = null;
+                importedTask.IsDaily = true;
+            }
+            else
+            {
+                importedTask.EndTime = Convert.ToDateTime(temp[2]);
+                importedTask.IsDaily = false;
+            }
+
+            if (temp[4] == "t")
+            {
+                importedTask.IsImportant = true;
+            }
+            else
+            {
+                importedTask.IsImportant = false;
+            }
+
+            return importedTask;
+        }
+
 
 
     }
